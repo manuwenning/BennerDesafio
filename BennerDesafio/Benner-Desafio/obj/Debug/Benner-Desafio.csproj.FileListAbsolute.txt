@@ -1,0 +1,8 @@
+C:\Users\emanu\source\repos\BennerDesafio\Benner-Desafio\obj\Debug\Benner-Desafio.csproj.AssemblyReference.cache
+C:\Users\emanu\source\repos\BennerDesafio\Benner-Desafio\obj\Debug\Benner-Desafio.csproj.SuggestedBindingRedirects.cache
+C:\Users\emanu\source\repos\BennerDesafio\Benner-Desafio\obj\Debug\Benner-Desafio.csproj.CoreCompileInputs.cache
+C:\Users\emanu\source\repos\BennerDesafio\Benner-Desafio\bin\Debug\Benner-Desafio.exe.config
+C:\Users\emanu\source\repos\BennerDesafio\Benner-Desafio\bin\Debug\Benner-Desafio.exe
+C:\Users\emanu\source\repos\BennerDesafio\Benner-Desafio\bin\Debug\Benner-Desafio.pdb
+C:\Users\emanu\source\repos\BennerDesafio\Benner-Desafio\obj\Debug\Benner-Desafio.exe
+C:\Users\emanu\source\repos\BennerDesafio\Benner-Desafio\obj\Debug\Benner-Desafio.pdb
