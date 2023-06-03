@@ -21,7 +21,7 @@ namespace Benner_Desafio
                 Console.WriteLine("Olá, o que você deseja fazer?");
                 Console.WriteLine("\n1 - Adicionar conexão\n2 - Consultar conexão\n3 - Mostrar o total de conexões \n4 - Conhecendo mais sobre mim\n5 - Sair\n");
                 //variável para receber a escolha do usuário
-                int escolhaMenu = int.Parse(CR());
+                int escolhaMenu = CR();
                 int num1;
                 int num2;
                 int choice;
@@ -37,22 +37,14 @@ namespace Benner_Desafio
                             Console.Clear();
                             Console.WriteLine("Digite os dois números que você deseja conectar:\n");
                             //Função de adicionar uma conexão entre dois inteiros
-                            num1 = int.Parse(CR());
-                            num2 = int.Parse(CR());
+                            num1 = CR();
+                            num2 = CR();
                             //Filtra se os dados inseridos estão no intervalo de inteiros entre 1 e 8, e se não são iguais
                             if (num1 < 1 || num1 > 8 || num2 < 1 || num2 > 8 || num1 == num2)
                             {
-                                try
-                                {
-                                    throw new ArgumentException("\nATENÇÃO\nOs números precisam estar no intervalo entre 1 e 8, e não podem ser iguais\n\nClique \n1 - Sim (para tentar adicionar de novo a conexão\n2 - Não (para voltar ao menu principal)\n");
-                                }
-                                catch (ArgumentException ex)
-                                {
-                                    //Variável não adicionada, volta para a inserção de outros inteiros
-                                    Console.Clear();
-                                    Console.WriteLine(ex.Message);
-                                    if (int.TryParse(CR(), out choice))
-                                    {
+                                Console.WriteLine("\nATENÇÃO\nOs números precisam estar no intervalo entre 1 e 8, e não podem ser iguais\n\nClique \n1 - Sim (para tentar adicionar de novo a conexão\n2 - Não (para voltar ao menu principal)\n");
+                                choice = CR();
+                                    
                                         if (choice == 1)
                                         {
                                             Console.Clear();
@@ -69,15 +61,10 @@ namespace Benner_Desafio
                                             CR();
                                             break;
                                         }
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("Escolha inválida, voltando ao menu principal...");
-                                        CR();
-                                        break;
-                                    }
-                                }
+                                    
+                                    
                             }
+                            
                             else
                             {
                                 //Variável adicionada, vai pra fora deste while
@@ -90,46 +77,36 @@ namespace Benner_Desafio
                         case 2:
                         //Variável para determinar se a consulta gerou resultado, ou não.
                         bool consultaValida = false;
+                        choice = CR();
                         do
                         {
                             Console.Clear();
                             Console.WriteLine("Digite os dois números que você deseja consultar:\n");
                             //Função de consultar os dois inteiros
-                            num1 = int.Parse(CR());
-                            num2 = int.Parse(CR());
+                            num1 = CR();
+                            num2 = CR();
                             //Filtra se os dados inseridos estão no intervalo de inteiros entre 1 e 8, e se não são iguais
                             if (num1 < 1 || num1 > 8 || num2 < 1 || num2 > 8 || num1 == num2)
                             {
-                                try
+                                Console.WriteLine("\nNão pode haver uma conexão entre os elementos, pois os números precisam estar no intervalo entre 1 e 8, e não podem ser iguais\n\nClique \n1 - Sim (quero fazer nova consulta\n2 - Não (para voltar ao menu principal)\n");
+                                if (choice == 1)
                                 {
-                                    throw new ArgumentException("\nNão pode haver uma conexão entre os elementos, pois os números precisam estar no intervalo entre 1 e 8, e não podem ser iguais\n\nClique \n1 - Sim (quero fazer nova consulta\n2 - Não (para voltar ao menu principal)\n");
-                                }
-                                catch (ArgumentException ex)
-                                {
-                                    //Variável não pode gerar consulta
                                     Console.Clear();
-                                    Console.WriteLine(ex.Message);                                    
-                                    if (int.TryParse(CR(), out choice))
-                                    {
-                                        if (choice == 1)
-                                        {
-                                            Console.Clear();
-                                            consultaValida = false;
-                                        }
-                                        else if (choice == 2)
-                                        {
-                                            consultaValida = true;
-                                            break;
-                                        }
-                                        else
-                                        {
-                                            Console.WriteLine("Escolha inválida, voltando ao menu principal...");
-                                            CR();
-                                            break;
-                                        }
-                                    }                                    
+                                    consultaValida = false;
+                                }
+                                else if (choice == 2)
+                                {
+                                    consultaValida = true;
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Escolha inválida, voltando ao menu principal...");
+                                    CR();
+                                    break;
                                 }
                             }
+
                             else
                             {
                                 //Variável pôde ser consultada
@@ -223,17 +200,38 @@ namespace Benner_Desafio
             }
         }
 
-        public static string CR()
+        public static int CR()
         {
             string input = Console.ReadLine();
-            // Verifica se o usuário não digitou nada
-            while (string.IsNullOrEmpty(input))
+            int value;
+
+            try
             {
-                Console.WriteLine("Nenhum valor foi inserido. Digite novamente:");
-                input = Console.ReadLine();
+                value = int.Parse(input);
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Valor inválido. Escolha entre:\n1 - Tentar novamente\n2 - Voltar ao menu principal");
+                string choice = Console.ReadLine();
+
+                if (choice == "1")
+                {
+                    Console.WriteLine("Digite novamente:");
+                    return CR();
+                }
+                else if (choice == "2")
+                {
+                    // Retornar um valor especial para indicar que o usuário deseja voltar ao menu principal
+                    return -1;
+                }
+                else
+                {
+                    Console.WriteLine("Opção inválida. Digite novamente:");
+                    return CR();
+                }
             }
 
-            return input;
+            return value;
         }
     }
 }
